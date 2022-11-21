@@ -246,9 +246,40 @@ class PassagemArea{
     }
 }
 
-let cliente = new Cliente("Diego Alves", "70102836647","25/01/2004")
 
-let voo = new Voo("Azul","13554","24/01/2022",14,"Ipatinga, Minas Gerais","Amsterdan, Holanda")
+
+
+
+let condicao = "6"
+let cliente
+let clientes = []
+let voo
+let voos = []
+do {
+    condicao = prompt("O que o deseja?" + "\n" + "1 = Criar novo cliente." + "\n" + "2 = Criar novo voo.")
+    switch (condicao) {
+        case "1":
+            let nome = prompt("Informa o seu Nome.")
+            let cpf = prompt("Informa o número do cpf")
+            let dataNascimento = prompt("Informe sua data de nascimento")
+            cliente = new Cliente(nome, cpf, dataNascimento)
+            clientes.push(cliente)
+            break;
+        case "2":
+            let empresa = prompt("Informe o nome da empresa do voo.")
+            let numero = parseInt(prompt("Informe o número do voo."))
+            let data = prompt("Informe a data do voo.")
+            let horario = prompt("Informe o horario do voo.")
+            let localPartida = prompt("Informe o local de partida do voo.")
+            let localDestino = prompt("Informe o local de destino do voo.")
+            voo = new Voo(empresa, numero, data, horario, localPartida, localDestino)
+            voos.push(voo)
+        case "6":
+            alert("Obrigado por usar os nossos serviços!")
+        default:
+            break;
+    }
+} while (condicao != "6");
 
 let passagemArea = new PassagemArea(14, true, 1500.00, cliente, voo)
 passagemArea.CalcularValor()
