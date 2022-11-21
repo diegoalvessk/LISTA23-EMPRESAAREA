@@ -46,10 +46,10 @@ class Cliente{
 }
 
 class PacoteViagem{
-    Titular
-    PassagemIda
-    PassagemVolta  
-    ValorTotal
+    #Titular
+    #PassagemIda
+    #PassagemVolta  
+    #ValorTotal
 
     constructor(passagemArea, passagemVolta){
         this.setTitular(passagemArea)
@@ -58,53 +58,191 @@ class PacoteViagem{
         this.setValorTotal(passagemArea)
     }
 
+    setTitular(passagemArea){
+        this.#Titular = passagemArea.getPassageiro()   
+    }
+
+    getTitular(){
+        return this.#Titular
+    }
+
+    setPassagemIda(passagemArea){
+        this.#PassagemIda = passagemArea.getVoo()
+    }
+
+    getPassagemIDa(){
+        return this.#PassagemIda
+    }
+
+    setPassagemVolta(passagemVolta){
+        this.#PassagemVolta = passagemVolta
+    }
+
+    getPassagemVolta(){
+        return this.#PassagemVolta
+    }
+
+    setValorTotal(passagemArea){
+        this.#ValorTotal = passagemArea.getValor()
+    }
+
+    getValorTotal(){
+        return this.#ValorTotal
+    }
+
 
 }
 
 class Voo{
-    Empresa
-    Numero
-    Data
-    Horario
-    LocalPartida
-    LocalDestino
+    #Empresa
+    #Numero
+    #Data
+    #Horario
+    #LocalPartida
+    #LocalDestino
 
     constructor(empresa, numero, data, horario, localDestino, localPartida){
-        this.Empresa = empresa
-        this.Numero = numero
-        this.Data = data
-        this.Horario = horario
-        this.LocalPartida = localPartida
-        this.LocalDestino = localDestino
+        this.setEmpresa(empresa)
+        this.setNumero(numero)
+        this.setData(data)
+        this.setHorario(horario)
+        this.setLocalPartida(localPartida)
+        this.setLocalDestino(localDestino)
+    }
+
+    setEmpresa(empresa){
+        this.#Empresa = empresa
+    }
+
+    setNumero(numero){
+        this.#Numero = numero
+    }
+
+    setData(data){
+        this.#Data = data
+    }
+
+    setHorario(horario){
+        this.#Horario = horario
+    }
+
+    setLocalPartida(localPartida){
+        this.#LocalPartida = localPartida
+    }
+
+    setLocalDestino(localDestino){
+        this.#LocalDestino = localDestino
+    }
+
+
+
+    getEmpresa(){
+        return this.#Empresa 
+    }
+
+    getNumero(){
+        return this.#Numero 
+    }
+
+    getData(){
+        return this.#Data 
+    }
+
+    getHorario(){
+        return this.#Horario 
+    }
+
+    getLocalPartida(){
+        return this.#LocalPartida
+    }
+
+    getLocalDestino(){
+        return this.#LocalDestino 
     }
 }
 
 class PassagemArea{
-    Assento
-    PrimeiraClasse
-    Valor
-    Passageiro
-    Voo
+    #Assento
+    #PrimeiraClasse
+    #Valor
+    #Passageiro
+    #Voo
 
     constructor(assento, primeiraClasse, valor, cliente, voo){
-        this.Assento = assento
-        this.PrimeiraClasse = primeiraClasse
-        this.Valor = valor
-        this.Passageiro = cliente
-        this.Voo = voo
+        this.setAssento(assento) 
+        this.setPrimeiraClasse(primeiraClasse) 
+        this.setValor(valor) 
+        this.setPassageiro(cliente)
+        this.setVoo(voo)
     }
 
 
+    setAssento(assento){
+        this.#Assento = assento
+    }
+
+    setPrimeiraClasse(primeiraClasse){
+        while(primeiraClasse != true || false){
+            alert("Por favor informe um valor aceitavel, true ou false.")
+            primeiraClasse = prompt("Informe o valor, true para sim e false para não.")
+        }
+
+        this.#PrimeiraClasse = primeiraClasse
+    }
+
+    setValor(valor){
+        while(valor<=0){
+            alert("Não é permitido um valor menor ou igual a 0, informe outro valor.")
+            valor = prompt("Informe o novo valor.")
+        }
+
+        this.#Valor = valor
+    }
+
+    setPassageiro(cliente){
+        this.#Passageiro = cliente
+    }
+
+    setVoo(voo){
+        this.#Voo = voo
+    }
+
+
+
+
+    getAssento(){
+        return this.#Assento 
+    }
+
+    getPrimeiraClasse(){
+        return this.#PrimeiraClasse 
+    }
+
+    getValor(){
+        return  this.#Valor 
+    }
+
+    getPassageiro(){
+        return this.#Passageiro 
+    }
+
+    getVoo(){
+        return this.#Voo 
+    }
+
+
+
+
     CalcularValor(){
-        if(this.PrimeiraClasse == true){
-            this.Valor = (this.Valor/100) * 150
+        if(this.#PrimeiraClasse == true){
+            this.#Valor = (this.#Valor/100) * 150
         }
 
         console.log("Funcionando certinho.")
     }
 
     ExibirResumo(){
-        alert(" Passagem no nome de: " + this.Passageiro.Nome + "no assento: " + this.Assento + " do voo " + this.Voo.Numero + " com destino a " + this.Voo.LocalDestino)
+        alert(" Passagem no nome de: " + this.#Passageiro.Nome + "no assento: " + this.#Assento + " do voo " + this.#Voo.Numero + " com destino a " + this.#Voo.LocalDestino)
     }
 }
 
