@@ -187,6 +187,8 @@ class PassagemArea{
             valor = prompt("Informe o novo valor.")
         }
 
+        valor = CalcularValor(valor)
+
         this.#Valor = valor
     }
 
@@ -224,33 +226,29 @@ class PassagemArea{
 
 
 
-    CalcularValor(){
-        if(this.#PrimeiraClasse == true){
-            this.#Valor = (this.#Valor/100) * 150
+    CalcularValor(valor){
+        if(this.getPrimeiraClasse() == true){
+            valor = (valor/100) * 150
         }
 
-        console.log("Funcionando certinho.")
+        return valor
     }
 
     ExibirResumo(){
-        alert(" Passagem no nome de: " + this.#Passageiro.Nome + "no assento: " + this.#Assento + " do voo " + this.#Voo.Numero + " com destino a " + this.#Voo.LocalDestino)
+        alert(" Passagem no nome de: " + this.getPassageiro().Nome + "no assento: " + this.getAssento() + " do voo " + this.getVoo().Numero + " com destino a " + this.getVoo().LocalDestino)
     }
 }
-
-
-
-
 
 let condicao = "6"
 let cliente
 let clientes = []
-let voo
+let vou
 let voos = []
 let passagemArea
 let passagensAreas = []
 
 do {
-    condicao = prompt("O que o deseja?" + "\n" + "1 = Criar novo cliente." + "\n" + "2 = Criar novo voo.")
+    condicao = prompt("O que o deseja?" + "\n" + "1 = Criar novo cliente." + "\n" + "2 = Criar novo voo." + "\n" + "3 = Comprar uma passagem aerea" + "\n" + "4 - Comprar pacote de viagem.")
     switch (condicao) {
         case "1":
             let nome = prompt("Informa o seu Nome.")
@@ -282,9 +280,9 @@ do {
             let localPartida = prompt("Informe o local de partida do voo.")
             let localDestino = prompt("Informe o local de destino do voo.")
 
-            voo = new Voo(empresa, numero, data, horario, localPartida, localDestino)
+            vou = new Voo(empresa, numero, data, horario, localPartida, localDestino)
 
-            voos.push(voo)
+            voos.push(vou)
             break;
 
         case "3":
@@ -339,10 +337,41 @@ do {
 
             
 
-            let
-            passagemArea = new PassagemArea(14, true, 1500.00, passageiro, voo)
-            break;
+            let primeiraClasse = prompt("Você deseja voo primeira classe? s = sim e n = nao")
 
+            if(primeiraClasse == ""){
+                primeiraClasse = true
+            }else{
+                primeiraClasse = false
+            }
+
+            let assento = parseInt(prompt("Informe o número do acento que deseja."))
+
+            for (let index = 0; index < passagensAreas.length; index++) {
+                if(voo == passagensAreas[index].Voo){
+                   while(assento == passagensAreas[index].Assento){
+                        alert("Já existe uma pessoa nessa vaga, escolha outra.")
+                        assento = prompt("Informe o número do acento que deseja.")
+                    }
+                }
+            }
+
+            let valor = parseInt(prompt("Informe o valor do voo."))
+
+            while(valor<=0){
+                valor = parseInt(prompt("Informe o valor do voo maior que 0."))
+            }
+
+
+            passagemArea = new PassagemArea(assento, primeiraClasse, valor, passageiro, voo)
+            break;
+        
+
+
+        case "4":
+
+
+            break;
         case "6":
             alert("Obrigado por usar os nossos serviços!")
             break;
@@ -350,8 +379,6 @@ do {
             break;
     }
 } while (condicao != "6");
-
-passagemArea.CalcularValor()
 
 let pacoteViagem = new PacoteViagem(passagemArea, "28/01/2022")
 
