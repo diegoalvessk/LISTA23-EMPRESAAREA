@@ -173,21 +173,12 @@ class PassagemArea{
     }
 
     setPrimeiraClasse(primeiraClasse){
-        while(primeiraClasse != true || false){
-            alert("Por favor informe um valor aceitavel, true ou false.")
-            primeiraClasse = prompt("Informe o valor, true para sim e false para não.")
-        }
 
         this.#PrimeiraClasse = primeiraClasse
     }
 
     setValor(valor){
-        while(valor<=0){
-            alert("Não é permitido um valor menor ou igual a 0, informe outro valor.")
-            valor = prompt("Informe o novo valor.")
-        }
-
-        valor = CalcularValor(valor)
+        valor = this.CalcularValor(valor)
 
         this.#Valor = valor
     }
@@ -301,7 +292,7 @@ do {
 
                 while(cont == 0){
                     for (let index = 0; index < clientes.length; index++) {
-                    if(passageiro == clientes[index].Nome){
+                    if(passageiro == clientes[index].getNome()){
                         alert("Cliente autorizado!")
                         cont++
                     }
@@ -311,7 +302,6 @@ do {
                         alert("Cliente não encontrado, repita o nome.")
                         passageiro = prompt("Informe aqui o nome do cliente completo e sem erros")
                     }
-                    cont = 0
                 }
 
             alert("Escolha agora no nosso quadro de voos, o voo que você deseja!")
@@ -320,11 +310,11 @@ do {
                     console.log(voos[index])
                 }
 
-            let voo = promp("Informe o número do voo que deseja marcar sua passagem.")
+            let voo = parseInt(prompt("Informe o número do voo que deseja marcar sua passagem."))
 
                 while(cont == 0){
                     for (let index = 0; index < voos.length; index++) {
-                    if(voo == voos[index].Numero){
+                    if(voo == voos[index].getNumero()){
                         alert("Voo encontrado!")
                         cont++
                     }
@@ -335,14 +325,13 @@ do {
                         voo = promp("Informe o número do voo que deseja marcar sua passagem.")
                     }
 
-                    cont = 0
                 }
 
             
 
             let primeiraClasse = prompt("Você deseja voo primeira classe? s = sim e n = nao")
 
-            if(primeiraClasse == ""){
+            if(primeiraClasse == "s"){
                 primeiraClasse = true
             }else{
                 primeiraClasse = false
@@ -351,8 +340,8 @@ do {
             let assento = parseInt(prompt("Informe o número do acento que deseja."))
 
             for (let index = 0; index < passagensAreas.length; index++) {
-                if(voo == passagensAreas[index].Voo){
-                   while(assento == passagensAreas[index].Assento){
+                if(voo == passagensAreas[index].getVoo()){
+                   while(assento == passagensAreas[index].getAssento()){
                         alert("Já existe uma pessoa nessa vaga, escolha outra.")
                         assento = prompt("Informe o número do acento que deseja.")
                     }
@@ -380,7 +369,7 @@ do {
 
                 while(cont2 == 0){
                     for (let index = 0; index < clientes.length; index++) {
-                    if(nomi == clientes[index].Nome){
+                    if(nomi == clientes[index].getNome()){
                         alert("Passageiro autorizado!")
                         nomi = index
                         cont2++
@@ -391,7 +380,6 @@ do {
                         alert("Passageiro não encontrado, repita o nome.")
                         nomi = prompt("Informe aqui o nome do Passageiro completo e sem erros")
                     }
-                    cont2 = 0
                 }
             pacoteViagem = new PacoteViagem(passagemArea)
             
