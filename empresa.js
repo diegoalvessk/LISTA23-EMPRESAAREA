@@ -42,10 +42,10 @@ class PacoteViagem{
     #PassagemVolta  
     #ValorTotal
 
-    constructor(passagemArea, passagemVolta){
+    constructor(passagemArea){
         this.setTitular(passagemArea)
         this.setPassagemIda(passagemArea)
-        this.setPassagemVolta(passagemVolta)
+        this.setPassagemVolta()
         this.setValorTotal(passagemArea)
     }
 
@@ -65,8 +65,8 @@ class PacoteViagem{
         return this.#PassagemIda
     }
 
-    setPassagemVolta(passagemVolta){
-        this.#PassagemVolta = passagemVolta
+    setPassagemVolta(){
+        this.#PassagemVolta = prompt("Informe em qual data você deseja voltar")
     }
 
     getPassagemVolta(){
@@ -246,6 +246,9 @@ let vou
 let voos = []
 let passagemArea
 let passagensAreas = []
+let pacoteViagem 
+let pacotesViagens = []
+let nome = ""
 
 do {
     condicao = prompt("O que o deseja?" + "\n" + "1 = Criar novo cliente." + "\n" + "2 = Criar novo voo." + "\n" + "3 = Comprar uma passagem aerea" + "\n" + "4 - Comprar pacote de viagem.")
@@ -364,13 +367,34 @@ do {
 
 
             passagemArea = new PassagemArea(assento, primeiraClasse, valor, passageiro, voo)
+            passagensAreas.push(passagemArea)
             break;
         
 
 
         case "4":
+            let nomi = alert("Informe o nome do dono da passagemArea.")
 
 
+            let cont2 = 0
+
+                while(cont2 == 0){
+                    for (let index = 0; index < clientes.length; index++) {
+                    if(nomi == clientes[index].Nome){
+                        alert("Passageiro autorizado!")
+                        nomi = index
+                        cont2++
+                    }
+                    }
+                    
+                    if(cont2 == 0){
+                        alert("Passageiro não encontrado, repita o nome.")
+                        nomi = prompt("Informe aqui o nome do Passageiro completo e sem erros")
+                    }
+                    cont2 = 0
+                }
+            pacoteViagem = new PacoteViagem(passagemArea)
+            
             break;
         case "6":
             alert("Obrigado por usar os nossos serviços!")
@@ -380,5 +404,5 @@ do {
     }
 } while (condicao != "6");
 
-let pacoteViagem = new PacoteViagem(passagemArea, "28/01/2022")
+
 
